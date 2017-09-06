@@ -56,6 +56,8 @@ http POST :3000/api/toy name=barney desc='purple dino' price='$10' material=plas
   I added the following to my package.json scripts:
   "debugger": "node inspect server.js",
 
+  I've added the server.js to the lib directory. 
+
   Then in terminal, within the project directory, type:
   npm run debugger
 

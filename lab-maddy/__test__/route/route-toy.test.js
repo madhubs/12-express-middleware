@@ -1,20 +1,19 @@
 'use strict'
 
-const superagent = require('superagent');
-const server = require('../../server');
 const Promise = require('bluebird');
+const superagent = require('superagent');
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
+require('../../lib/server').listen(3000);
 require('jest');
 
 //Michelle and Said were a huge help in sharing what they had learned about tests
 describe('Testing toy routes', function() {
-  afterAll(done => server.close(done));
-
+  afterAll(done => server.close(done));//this is not in demo code
   describe('all requests to /api/toy', () => {
     describe('POST requests', () => {
       describe('Valid Requests', () => {
         test('should create and return a new toy, given a valid request', () => {
-          superagent.post(':3000/api/toy')//deleted beforeAll() above superagent
+          superagent.post(':3000/api/toy')//deleted beforeAll(done => ) above superagent
             .type('application/json')
             .send({
               name: 'barney',
@@ -23,6 +22,9 @@ describe('Testing toy routes', function() {
             .then(res => {
               this.mockToy = res.body;
               this.resPost = res;
+              done()//adding this from code review
+            })
+        })
               expect(this.mockToy).toBeInstanceOf(Object);
               expect(this.mockToy).toHaveProperty('name');
               expect(this.mockToy).toHaveProperty('desc');
@@ -30,7 +32,7 @@ describe('Testing toy routes', function() {
             });
         });
         test('should have a name, given a valid request', () => {
-          expect(this.mockToy.name).toBe('barney');
+          expect(this.mockToy.name).toBe ('barney');
         });
         test('should have a desc, given a valid request', () => {
           expect(this.mockToy.desc).toBe('purple dino');
