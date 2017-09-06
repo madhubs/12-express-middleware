@@ -34,7 +34,7 @@ module.exports = function(router) {
 });
 
   router.put('/api/toy:_id', (req, res, next) => {
-    debug('/api/toy PUT');     //deleting the .then and .catch and the res.writehead and res.write and res.end methods
+    debug('/api/toy PUT');     //deleting the long hand .then and .catch and the res.writehead and res.write and res.end methods
 
     return storage.update(req.params._id, req.body)
     .then(()=> res.sendStatus(204))
@@ -42,14 +42,10 @@ module.exports = function(router) {
   });
 
   router.delete('/api/toy:_id', (req, res, next) => {
-    debug('/api/toy PUT');     //deleting the .then and .catch and the res.writehead and res.write and res.end methods
+    debug('/api/toy DELETE');     //deleting the long hand .then and .catch and the res.writehead and res.write and res.end methods
 
-    return storage.update(req.params._id, req.body)
+    return storage.destroy(req.params._id)
     .then(()=> res.sendStatus(204))
     .catch(next)
-  });
-
-
-
   });
 };

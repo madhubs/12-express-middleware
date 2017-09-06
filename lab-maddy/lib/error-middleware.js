@@ -1,14 +1,10 @@
 //errors get handed off to this file so that things can keep moving
-
-'use strict';
-
-
 'use strict'
 
 const createError = require('http-errors')
 const debug = require('debug')('http:error-middleware')
 
-module.exports = function(err, req, res, next) { //express gives us a different object to work with 
+module.exports = function(err, req, res, next) { //express gives us a different object to work with
   if(err.status) {
     debug('user error')
     res.status(err.status).send(err.name)
