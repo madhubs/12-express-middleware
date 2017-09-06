@@ -21,10 +21,10 @@
     }
   },
   "scripts": {
-    "start": "node server.js",
-    "start:watch": "nodemon server.js",
-    "start:debug": "DEBUG=http* nodemon server.js",
-    "debugger": "node inspect server.js",
+    "start": "node indexs.js",
+    "start:watch": "nodemon indexs.js",
+    "start:debug": "DEBUG=http* nodemon indexs.js",
+    "debugger": "node inspect indexs.js",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "lint": "eslint .",

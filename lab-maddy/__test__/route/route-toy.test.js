@@ -37,7 +37,7 @@ describe('Testing toy routes', function() {
         });
         test('should have an _id, given a valid request', () => {
           expect(this.mockToy).toHaveProperty('_id');
-          expect(this.mockToy._id).toBeTruthy();//got rid of regex
+          expect(this.mockToy._id).toBeTruthy();//got rid of regex that was here!!!!!
         });
         test('should return a 201 CREATED, given a valid request', () => {
           expect(this.resPost.status).toBe(201);
@@ -53,6 +53,18 @@ describe('Testing toy routes', function() {
               done();
             });
         });
+        test('should resturn a status of 400 Bad Request', ()=> {
+          expect(this.errPost.status).toBe(400);
+          expect(this.errPost.message).toBe('Bad Request'); //name or message
+        })
+        test('should return 404 on invalid endpoint', done => {
+          superagent.post(':3000/bad/endpoint')
+          .type('application/json')
+          .send({})
+          .catch(err => {
+            expect(err.status).toBe(404)//we defined this in server.js??
+          })
+        })
       });
     });
 

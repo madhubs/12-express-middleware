@@ -2,6 +2,8 @@
   * What this API does:
    The goal of this project is to practice creating a single resource express API that can handle GET, POST, PUT, and DELETE requests.
 
+   A few of us went back and worked on lab 9, by getting the majority of the tests working and then we copied that work into this lab.
+
   * We will work with application, router, and 3rd party middleware through the use of express.js.
   * We will be able to implement custom middleware through the use of express.js.
   * We will be able to create custom routers for a specific resource.
@@ -31,7 +33,11 @@ http POST :3000/api/toy name=barney desc='purple dino' price='$10' material=plas
 
 # Packages and commands to remember:
   - In package.json's scripts, add- "start:debug": "DEBUG=http* nodemon server.js",
+  - created an index.js and set it as the start point in package.json
+  - deleted parse-url.json and ________
+  - added a cors.js file
 
+  - npm install express -
   - npm install (for node modules) -
   - npm install httpie -
   - npm install superagent -
