@@ -19,9 +19,10 @@
           2. You will need to install httpie in one terminal window.
           3. Then start up nodemon in a separate terminal window.
 
-
+HOW TO TEST PUT IN TERMINAL:
 - To get an object in terminal, paste this to test (we're able to do this with the http client- superagent to make request on the server side to test for objects like this one):
-http POST :3000/api/toy name=barney desc='purple dino' price='$10' material=plastic
+
+http POST :3000/api/toy name=barney desc='purple dino'
 
 - Example responses:
 * I realize the following is probably not what is being asked of me, but it's all I've got right now.
@@ -37,7 +38,7 @@ http POST :3000/api/toy name=barney desc='purple dino' price='$10' material=plas
   - deleted parse-url.json and ________
   - added a cors.js file
 
-  - npm install express -
+  - npm install express - DONE
   - npm install (for node modules) -
   - npm install httpie -
   - npm install superagent -
@@ -48,7 +49,7 @@ http POST :3000/api/toy name=barney desc='purple dino' price='$10' material=plas
   - node server.js or just nodemon (depending on the day??)
     - rs (restart, if needed)
   - run start: watch -
-  - npm run start: debug -
+  - npm run start:debug - then attempt a POST and this will tell you where you're wrong
 
   - npm run debugger -
   - npm install bluebird (sets this as a dependency in package.json) -
@@ -56,7 +57,7 @@ http POST :3000/api/toy name=barney desc='purple dino' price='$10' material=plas
   I added the following to my package.json scripts:
   "debugger": "node inspect server.js",
 
-  I've added the server.js to the lib directory. 
+  I've added the server.js to the lib directory.
 
   Then in terminal, within the project directory, type:
   npm run debugger

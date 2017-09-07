@@ -9,30 +9,30 @@ const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 const storage = module.exports = {};
 
 //POST (a storage method)
-storage.create = function(itemId) {
-  debug('#create');
-  // debugger;
-  return new Promise((resolve, reject)=> {
-    // if(!schema) return reject(new Error('cannot create; schema required'));
-    if(!item.name || !item.desc) return reject(createError(400, 'cannot create; item required'));
-    if(!item.desc) return reject(createError(400, 'cannot create; desc required'))
-    // return reject(createError(400, 'cannot create; valid name required'))
+storage.create = function(item) {
+  debug('#create')
 
-    let toy = new Toy(item.name, item.desc);
+  return new Promise((resolve, reject) => {
+    if(!item.name || typeof item.name !== 'string')
+      return reject(createError(400, 'cannot create; valid name required'))
+    if(!item.desc || typeof item.name !== 'string')
+      return reject(createError(400, 'cannot create; desc required'))
 
-    return fs.writeFileProm(`${__dirname}/../data/toy${toy._id}/${newToy._id}.json`, JSON.stringify(toy)) //changed from item
-      .then(() => resolve(toy)) //take the item and hand to route (route-toy.js) and then moved to the response model. Pass in the toy as a stringified object.
-      .catch(reject);//or console.error //something went wrong with the server. And we've created that 500 error in the error middleware file.
-  });
-};
+    let toy = new Toy(item.name, item.desc)
+
+    return fs.writeFileProm(`${__dirname}/../data/toy/${toy._id}.json`, JSON.stringify(toy))
+    .then(() => resolve(toy))
+    .catch(err => reject(err))
+  })
+}
 
 
 storage.fetchOne = function(itemId) {
-  debug('#fetchOne')
+  debug('#fetchOne');
 
   return new Promise((resolve, reject) => {
     // if(!schema) return reject(new Error('cannot get item; schema required'))
-    if(!itemId) return reject(createError('cannot get item; itemId required'))
+    if(!itemId) return reject(createError('cannot get item; itemId required'));
 
     return fs.readFileProm(`${__dirname}/../data/toy/${itemId}.json`)
     .then(buff => {
@@ -43,18 +43,18 @@ storage.fetchOne = function(itemId) {
         return reject(e)
       }
     })
-    .catch(reject)
+    .catch(reject);
   })
 }
 
-  storage.fecthAll = function(schema) {
-    debug('#fetchAll')
+  storage.fecthAll = function() {
+    debug('#fetchAll');
 
   return new Promise((resolve, reject) => {  //a promise to return an array of objects
     return fs.readdirProm(`${__dirname}/../data/toy`)
     .then(filepaths => { //changed ids to filepaths for lab 9 but looks like it should be back to ids?
-      let data = Array.prototype.map.call(ids, (id => id.split('.', 1).toString()))//grab one thing(not the first thing necessarily), so it returns the id in string form. the tostring takes the interior array and strinifys it.
-      return resolve(data)
+      let data = Array.prototype.map.call(filePaths, (id => id.split('.', 1).toString()))//grab one thing(not the first thing necessarily), so it returns the id in string form. the tostring takes the interior array and strinifys it.
+      return resolve(data);
     })
     .catch(reject)
   });
@@ -62,17 +62,17 @@ storage.fetchOne = function(itemId) {
 
 
 storage.update = function(itemId) {
-  debug('#update')
+  debug('#update');
 
   return new Promise((resolve, reject) => {
-    if(!itemId) return reject(createError(400, 'cannot update; schema required'))
-    if(!item) return reject(createError(400, 'cannot update; item required'))
-    if(!item._id !== itemId) return reject(createError(400, 'cannot update; item required'))
+    if(!itemId) return reject(createError(400, 'cannot update; schema required'));
+    if(!item) return reject(createError(400, 'cannot update; item required'));
+    if(!item._id !== itemId) return reject(createError(400, 'cannot update; item required'));
 
     return fs.writeFileProm(`${__dirname}/../data/toy/${item._id}.json`, JSON.stringify(item))
     .then(resolve)
     .catch(reject)
-  })
+  });
 }
 
 //DELETE
