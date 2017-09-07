@@ -19,8 +19,8 @@
           2. You will need to install httpie in one terminal window.
           3. Then start up nodemon in a separate terminal window.
 
-HOW TO TEST PUT IN TERMINAL:
-- To get an object in terminal, paste this to test (we're able to do this with the http client- superagent to make request on the server side to test for objects like this one):
+HOW TO TEST POST IN TERMINAL:
+- To get an object in terminal, paste this in terminal (with your server still running in another window). (we're able to do this with the http client- superagent to make request on the server side to test for objects like this one):
 
 http POST :3000/api/toy name=barney desc='purple dino'
 
@@ -31,6 +31,56 @@ http POST :3000/api/toy name=barney desc='purple dino'
 
 
     ```
+
+HOW TO TEST GET IN TERMINAL (using the params method not the query method):
+http GET :3000/api/toy/f18a6d2b-753c-41f6-9c28-d2a7f0b41f21
+
+```
+HTTP/1.1 200 OK
+Allow-Access-Control-Headers: *
+Allow-Access-Control-Origin: *
+Connection: keep-alive
+Content-Length: 83
+Content-Type: application/json; charset=utf-8
+Date: Thu, 07 Sep 2017 00:56:30 GMT
+ETag: W/"53-/F+/Fnqkruzo8LzxS6zEk+CGFEo"
+X-Powered-By: Express
+
+{
+    "_id": "f18a6d2b-753c-41f6-9c28-d2a7f0b41f21",
+    "desc": "purple dino",
+    "name": "barney"
+}
+```
+
+HOW TO TEST A PUT IN TERMINAL:
+
+http PUT :3000/api/toy/f18a6d2b-753c-41f6-9c28-d2a7f0b41f21 name=isaac desc=human _id=f18a6d2b-753c-41f6-9c28-d2a7f0b41f21_
+
+```
+HTTP/1.1 204 No Content
+Allow-Access-Control-Headers: *
+Allow-Access-Control-Origin: *
+Connection: keep-alive
+Date: Thu, 07 Sep 2017 01:20:58 GMT
+ETag: W/"a-bAsFyilMr4Ra1hIU5PyoyFRunpI"
+X-Powered-By: Express
+```
+
+HOW TO TEST DELETE IN TERMINAL: ????? Is the following the correct syntax?
+
+http DELETE :3000/api/toy/f18a6d2b-753c-41f6-9c28-d2a7f0b41f21 name=isaac desc=human _id=f18a6d2b-753c-41f6-9c28-d2a7f0b41f21_
+
+```
+
+```
+And then if I test a GET on this object to make sure it's destroyed:
+
+```
+
+```
+
+
 
 # Packages and commands to remember:
   - In package.json's scripts, add- "start:debug": "DEBUG=http* nodemon server.js",

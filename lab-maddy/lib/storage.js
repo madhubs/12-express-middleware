@@ -26,13 +26,11 @@ storage.create = function(item) {
   })
 }
 
-
 storage.fetchOne = function(itemId) {
-  debug('#fetchOne');
+  debug('#fetchOne')
 
   return new Promise((resolve, reject) => {
-    // if(!schema) return reject(new Error('cannot get item; schema required'))
-    if(!itemId) return reject(createError('cannot get item; itemId required'));
+    if(!itemId) return reject(createError(400, 'cannot get item; itemId required'))
 
     return fs.readFileProm(`${__dirname}/../data/toy/${itemId}.json`)
     .then(buff => {
@@ -43,7 +41,7 @@ storage.fetchOne = function(itemId) {
         return reject(e)
       }
     })
-    .catch(reject);
+    .catch(reject)
   })
 }
 
@@ -61,18 +59,18 @@ storage.fetchOne = function(itemId) {
 }
 
 
-storage.update = function(itemId) {
-  debug('#update');
+storage.update = function(itemId, item) {
+  debug('#update')
 
   return new Promise((resolve, reject) => {
-    if(!itemId) return reject(createError(400, 'cannot update; schema required'));
-    if(!item) return reject(createError(400, 'cannot update; item required'));
-    if(!item._id !== itemId) return reject(createError(400, 'cannot update; item required'));
+    if(!itemId) return reject(createError(400, 'cannot update; itemId required'))
+    if(!item) return reject(createError(400, 'cannot update; item required'))
+    if(item._id !== itemId) return reject(createError(400, 'cannot update; item ids do not match'))
 
-    return fs.writeFileProm(`${__dirname}/../data/toy/${item._id}.json`, JSON.stringify(item))
+    return fs.writeFileProm(`${__dirname}/../data/toy/${itemId}.json`, JSON.stringify(item))
     .then(resolve)
     .catch(reject)
-  });
+  })
 }
 
 //DELETE
@@ -82,8 +80,8 @@ storage.destroy = function(itemId) {
   return new Promise((resolve, reject) => {
     if(!itemId) return reject(createError(400, 'cannot delete item; itemId required'))
 
-    return fs.unlinkProm(`${__dirname}/../data/toy/${itemId}.json`)//removed schema, replaced with toy
+    return fs.unlinkProm(`${__dirname}/../data/toy/${itemId}.json`)
     .then(resolve)
     .catch(reject)
-  });
+  })
 }
