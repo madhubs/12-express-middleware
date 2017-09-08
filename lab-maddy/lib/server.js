@@ -8,7 +8,7 @@ const router = express.Router();
 const app = express() //deleted module.exports = express()
 
 //middleware
-const bodyParser = require('body-parser').json();
+const bodyParser = require('body-parser').json(); //
 const cors = require('./cors');
 const errorMiddleware = require('./error-middleware');
 

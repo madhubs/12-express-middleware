@@ -33,6 +33,7 @@ http POST :3000/api/toy name=barney desc='purple dino'
     ```
 
 HOW TO TEST GET IN TERMINAL (using the params method not the query method):
+
 http GET :3000/api/toy/f18a6d2b-753c-41f6-9c28-d2a7f0b41f21
 
 ```
