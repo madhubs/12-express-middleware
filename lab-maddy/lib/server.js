@@ -5,7 +5,7 @@ const debug = require('debug')('http:server');
 //express setup //got rid of listening PORT because server.js is no longer the kickoff
 const express = require('express');
 const router = express.Router();
-const app = express() //deleted module.exports = express()
+const app = express(); //deleted module.exports = express()
 
 //middleware
 const bodyParser = require('body-parser').json(); //
